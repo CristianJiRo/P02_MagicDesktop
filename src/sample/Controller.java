@@ -1,9 +1,11 @@
 package sample;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 
 
 import java.awt.*;
@@ -20,15 +22,24 @@ public class Controller extends Component {
     @FXML private CheckBox cb_Red;
     @FXML private CheckBox cb_Green;
     @FXML private CheckBox cb_Blue;
-    //@FXML  choisB_list;
+    @FXML private ComboBox cx_rarity;
 
 
 
     public void initialize() {
 
-        ChoiceBox choisB_list = new ChoiceBox(
-                FXCollections.observableArrayList(
-                        "A", "B", "C"));
+        ObservableList<String> rarityList =FXCollections.observableArrayList(
+
+                "Common",
+                "Uncommon",
+                "Rare",
+                "Mythic Rare",
+                "Special",
+                "Basic Land",
+                "Any"
+        );
+
+        cx_rarity.setItems(rarityList);
 
 
 
