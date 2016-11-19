@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<HBox id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="580.0" minWidth="780.0" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<HBox id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="580.0" minWidth="780.0" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Pane fx:id="pn_izq" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" styleClass="fondoIz" stylesheets="@css/style.css" HBox.hgrow="NEVER">
          <children>
@@ -55,7 +55,7 @@
                   <Image url="@images/magic.png" />
                </image>
             </ImageView>
-            <ComboBox layoutX="10.0" layoutY="458.0" prefHeight="26.0" prefWidth="180.0" promptText="Rareza" styleClass="button" stylesheets="@css/style.css" />
+            <ComboBox id="cx_rarity" fx:id="cx_rarity" layoutX="10.0" layoutY="458.0" prefHeight="26.0" prefWidth="180.0" promptText="Rareza" styleClass="button" stylesheets="@css/style.css" />
          </children></Pane>
       <SplitPane disable="true" dividerPositions="0.2179930795847751, 0.7664359861591695" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="split" stylesheets="@css/style.css" HBox.hgrow="ALWAYS">
         <items>
