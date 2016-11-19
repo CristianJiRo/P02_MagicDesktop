@@ -52,8 +52,9 @@ public void Filtrar() {
     if (cb_White.isSelected()){
 
     }
-    //ChoiceBox choisB_list = new ChoiceBox();
-    //choisB_list.getItems().addAll("item1", "item2", "item3");
+
+    //System.out.println(cx_rarity.getValue());
+
 
 
 }
