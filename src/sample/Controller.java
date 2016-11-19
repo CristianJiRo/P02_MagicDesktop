@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 
 
 import java.awt.*;
@@ -17,12 +18,19 @@ import java.awt.*;
 
 public class Controller extends Component {
 
+
+    //Elementos del filtro.
     @FXML private CheckBox cb_White;
     @FXML private CheckBox cb_Black;
     @FXML private CheckBox cb_Red;
     @FXML private CheckBox cb_Green;
     @FXML private CheckBox cb_Blue;
     @FXML private ComboBox cx_rarity;
+
+    //ListView
+    @FXML private ListView<Card> lv_cardsList;
+    @FXML private ObservableList<Card> items = FXCollections.observableArrayList();
+
 
 
 

@@ -1,23 +1,16 @@
+package sample;
+
 /**
  * Created by Kamelot on 19/11/2016.
  */
 public class Card {
 
-    private String id;
     private String name;
     private String text;
     private String rarity;
     private String urlImage;
     private String type;
     private String [] colors;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
