@@ -14,10 +14,13 @@ import java.net.URL;
 
 public class HttpUtils {
     public static String get(String dataUrl) throws IOException {
+
         URL url = new URL(dataUrl);
         String response = null;
 
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0");
+
         try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             response = readStream(in);
@@ -27,12 +30,12 @@ public class HttpUtils {
         return response;
     }
 
+    private static String readStream(InputStream in) throws IOException {
 
-    private static String readStream(InputStream in) throws IOException{
-        InputStreamReader is = new InputStreamReader(in);
-        BufferedReader rd = new BufferedReader(is);
+        BufferedReader rd = new BufferedReader( new InputStreamReader(in));
         String line;
         StringBuilder response = new StringBuilder();
+
         while ((line = rd.readLine()) != null) {
             response.append(line);
             response.append('\r');
@@ -40,7 +43,5 @@ public class HttpUtils {
         rd.close();
         return response.toString();
     }
-
-
 
 }

@@ -3,7 +3,7 @@ package sample;
 /**
  * Created by Kamelot on 19/11/2016.
  */
-public class Card {
+ public class Card {
 
     private String name;
     private String text;

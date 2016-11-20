@@ -5,10 +5,11 @@ import com.sun.istack.internal.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.net.URI;
+import java.lang.String;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 
 
@@ -20,7 +21,6 @@ public class MagicApi {
     static final String Base_URL = "https://api.magicthegathering.io/v1/cards";
 
     static ArrayList<Card> getAllCards() {
-
         return doCall(Base_URL);
     }
 
@@ -42,7 +42,8 @@ public class MagicApi {
     @Nullable
     private static ArrayList<Card> doCall(String url) {
         try {
-            return proccesJson(HttpUtils.get(url));
+            String JsonResponse = HttpUtils.get(url);
+            return proccesJson(JsonResponse);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,6 +86,7 @@ public class MagicApi {
         }
         return cards;
     }
+
 
 
 }

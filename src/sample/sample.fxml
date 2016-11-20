@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -44,18 +43,18 @@
                   <Image url="@images/cblue.png" />
                </image>
             </ImageView>
-            <CheckBox fx:id="cb_White" layoutX="95.0" layoutY="167.0" mnemonicParsing="false" stylesheets="@css/style.css" text="Blanco" />
-            <CheckBox id="cb_Black" fx:id="cb_Black" layoutX="95.0" layoutY="222.0" mnemonicParsing="false" text="Negro" />
-            <CheckBox fx:id="cb_Red" layoutX="95.0" layoutY="277.0" mnemonicParsing="false" text="Rojo" />
-            <CheckBox fx:id="cb_Green" layoutX="95.0" layoutY="332.0" mnemonicParsing="false" text="Verde" />
-            <CheckBox fx:id="cb_Blue" layoutX="95.0" layoutY="387.0" mnemonicParsing="false" text="Azul" />
-            <Button fx:id="bt_filtrar" layoutX="10.0" layoutY="515.0" mnemonicParsing="false" onAction="#Filtrar" prefHeight="26.0" prefWidth="180.0" stylesheets="@css/style.css" text="Filtrar" />
+            <CheckBox fx:id="cb_White" layoutX="95.0" layoutY="167.0" mnemonicParsing="false" stylesheets="@css/style.css" text="White" />
+            <CheckBox id="cb_Black" fx:id="cb_Black" layoutX="95.0" layoutY="222.0" mnemonicParsing="false" text="Black" />
+            <CheckBox fx:id="cb_Red" layoutX="95.0" layoutY="277.0" mnemonicParsing="false" text="Red" />
+            <CheckBox fx:id="cb_Green" layoutX="95.0" layoutY="332.0" mnemonicParsing="false" text="Green" />
+            <CheckBox fx:id="cb_Blue" layoutX="95.0" layoutY="387.0" mnemonicParsing="false" text="Blue" />
+            <Button fx:id="bt_filtrar" layoutX="10.0" layoutY="515.0" mnemonicParsing="false" onAction="#Filtrar" prefHeight="26.0" prefWidth="180.0" stylesheets="@css/style.css" text="Filter" />
             <ImageView fx:id="im_logo" fitHeight="122.0" fitWidth="200.0" layoutX="38.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/magic.png" />
                </image>
             </ImageView>
-            <ComboBox fx:id="cx_rarity" layoutX="10.0" layoutY="458.0" prefHeight="26.0" prefWidth="180.0" promptText="Rareza" styleClass="button" stylesheets="@css/style.css" />
+            <ComboBox fx:id="cx_rarity" layoutX="10.0" layoutY="458.0" prefHeight="26.0" prefWidth="180.0" promptText="Rarity" styleClass="button" stylesheets="@css/style.css" />
          </children></Pane>
       <SplitPane disable="true" dividerPositions="0.2179930795847751, 0.7664359861591695" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="split" stylesheets="@css/style.css" HBox.hgrow="ALWAYS">
         <items>
@@ -89,11 +88,7 @@
       </SplitPane>
       <AnchorPane maxWidth="220.0" prefHeight="200.0" prefWidth="220.0" styleClass="fondoDe" stylesheets="@css/style.css" HBox.hgrow="NEVER">
          <children>
-            <ListView maxWidth="205.0" minWidth="205.0" prefWidth="205.0" styleClass="fondoOscuro" stylesheets="@css/style.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-            </ListView>
+            <ListView fx:id="lv_cardsList" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>
