@@ -6,18 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.cell.ComboBoxListCell;
-
-
-import javax.print.DocFlavor;
 import java.awt.*;
 
-import java.util.ResourceBundle;
-
-
 //API : https://docs.magicthegathering.io/
-
 
 
 public class Controller extends Component {
@@ -32,8 +23,9 @@ public class Controller extends Component {
     @FXML private ComboBox cx_rarity;
 
     //ListView
-    @FXML private ListView<Card> lv_cardsList;
+    @FXML private ListView<String> lv_cardsList;
     @FXML private ObservableList<Card> items = FXCollections.observableArrayList();
+    @FXML private ObservableList<String> cartas = FXCollections.observableArrayList();
 
 
     public void initialize() {
@@ -56,9 +48,13 @@ public class Controller extends Component {
 
         //ListView
         items.addAll(MagicApi.getAllCards());
-        lv_cardsList.setItems(items);
 
 
+        lv_cardsList.setItems(cartas);
+
+
+        for (int i = 0; i < items.size() ; i++) {
+              cartas.add(i, items.get(i).getName());}
 
         //lv_cardsList = new ListView<Card>();
         //lv_cardsList.setCellFactory(ComboBoxListCell.forListView(items));
@@ -68,13 +64,11 @@ public class Controller extends Component {
 
     }
 
-    public void CargarListView(){
-
-
+    public void OnSelection(){
+        System.out.println("ssssss");
+        //System.out.println(e);
 
     }
-
-
 
 
     public void Filtrar() {
