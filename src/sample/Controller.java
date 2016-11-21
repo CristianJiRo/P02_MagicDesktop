@@ -8,6 +8,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
@@ -73,7 +74,20 @@ public class Controller {
         public void updateItem(Card item, boolean empty) {
             super.updateItem(item, empty);
             if (item != null) {
-                setText(item.getName());
+                String [] color = item.getColors();
+                String colores="";
+                if(item.getColors()!=null) {
+                    for (int i = 0; i < color.length; i++) {
+                        colores=colores+ " " + color[i];
+                    }
+                }
+                setText(item.getName()+" \n" + colores);
+
+                //ImageView im = new ImageView(item.getUrlImage());
+                //setGraphic(im);
+
+
+
             }                }
             }
 
