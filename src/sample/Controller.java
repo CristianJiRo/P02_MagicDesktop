@@ -2,16 +2,21 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
+
 import java.awt.*;
+import java.util.Observable;
 
 //API : https://docs.magicthegathering.io/
 
-
-public class Controller extends Component {
+public class Controller {
 
 
     //Elementos del filtro.
@@ -23,7 +28,7 @@ public class Controller extends Component {
     @FXML private ComboBox cx_rarity;
 
     //ListView
-    @FXML private ListView<String> lv_cardsList;
+    @FXML private ListView<Card> lv_cardsList;
     @FXML private ObservableList<Card> items = FXCollections.observableArrayList();
     @FXML private ObservableList<String> cartas = FXCollections.observableArrayList();
 
@@ -44,31 +49,34 @@ public class Controller extends Component {
         );
 
         cx_rarity.setItems(rarityList);
-
-
-        //ListView
         items.addAll(MagicApi.getAllCards());
 
-
-        lv_cardsList.setItems(cartas);
-
-
         for (int i = 0; i < items.size() ; i++) {
-              cartas.add(i, items.get(i).getName());}
+            cartas.add(i, items.get(i).getName());}
 
-        //lv_cardsList = new ListView<Card>();
-        //lv_cardsList.setCellFactory(ComboBoxListCell.forListView(items));
-        //System.out.println(lv_cardsList.getItems().get(1).getName());
+        lv_cardsList.setCellFactory((ListView<Card> l) -> new CardCell());
 
-        //MagicApi.getAllCards();
+        lv_cardsList.setItems(items);
+        lv_cardsList.setOnMouseClicked(event -> {
 
-    }
+            Card celda = lv_cardsList.getSelectionModel().getSelectedItem();
+            System.out.println(celda.getName());
 
-    public void OnSelection(){
-        System.out.println("ssssss");
-        //System.out.println(e);
+        });
 
     }
+
+
+
+     class CardCell extends ListCell<Card> {
+        @Override
+        public void updateItem(Card item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null) {
+                setText(item.getName());
+            }                }
+            }
+
 
 
     public void Filtrar() {
