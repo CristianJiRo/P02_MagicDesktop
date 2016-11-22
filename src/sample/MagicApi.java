@@ -26,6 +26,7 @@ public class MagicApi {
 
     static ArrayList<Card> getCardsFilterColor(String color) {
         URI uri = URI.create(Base_URL+"?colors="+color);
+        //System.out.println(uri.toASCIIString());
         return doCall(uri.toASCIIString());
     }
 
