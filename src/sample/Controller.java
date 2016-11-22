@@ -35,9 +35,12 @@ public class Controller {
     @FXML private ListView<Card> lv_cardsList;
     @FXML private ObservableList<Card> items = FXCollections.observableArrayList();
 
+    //Variables para los filtros.
+    String rarity;
+    String colorSearch;
+
+
     public void initialize() {
-
-
         //Inicialización del ComboBox con los valores de las rarezas de las cartas.
         ObservableList<String> rarityList =FXCollections.observableArrayList(
 
@@ -60,8 +63,6 @@ public class Controller {
 
     }
 
-
-
      class CardCell extends ListCell<Card> {
          @Override
          public void updateItem(Card item, boolean empty) {
@@ -79,8 +80,6 @@ public class Controller {
 
                  //ImageView im = new ImageView(item.getUrlImage());
                  //setGraphic(im);
-
-
              }
          }
      }
@@ -89,53 +88,95 @@ public class Controller {
      //Mostramos los datos correspondientes en el ListView.
      public void LlenarVlist(ObservableList<Card> items){
 
-         items.addAll(MagicApi.getAllCards());
-
          //items.addAll(getCardsFilterColor("red"+pipe+"white"));
 
          lv_cardsList.setCellFactory((ListView<Card> l) -> new CardCell());
-
          lv_cardsList.setItems(items);
+
          lv_cardsList.setOnMouseClicked(event -> {
 
              Card celda = lv_cardsList.getSelectionModel().getSelectedItem();
+
+             //Lanzamos la funcion mostrar detalles.
+
+
              System.out.println(celda.getName());
 
          });
-
-
      }
 
 
     public void Filtrar() {
 
-        //Tratamiento del caracter | para la URL.
-        String pipe = "%7c";
+        //Iniciamos la variable conector con la coma para las busquedas con varios colores.
+        //La variable cantCol es para saber cuantos colores hay seleccionados.
+        String conector = "%7c";
         int cantCol=0;
+        colorSearch="";
 
-        String colores="";
+        //Guardamos el valor del filtro rarity en una variable.
+        rarity= (String) cx_rarity.getValue();
 
-        //System.out.println(cx_rarity.getValue());
+        //En este array añadiremos los colores seleccionados para generar la variable nevecasria para la busqueda con filtro.
+        String [] colores = new String []{null,null,null,null,null};
+
+        //Si queremos hacer una busqueda de cartas multicolor, cambiamos el conector por el valor tratado del pipe para la URL.
+        if (cb_1Color.isSelected()){
+            conector = ",";
+        }
 
         //Comprobamos cuantos colores hay seleccionados.
 
         if (cb_White.isSelected()) {
+            colores[cantCol]="white";
             cantCol++;
         }
         if (cb_Black.isSelected()) {
+            colores[cantCol]="black";
             cantCol++;
         }
         if (cb_Red.isSelected()) {
+            colores[cantCol]="red";
             cantCol++;
         }
         if (cb_Green.isSelected()) {
+            colores[cantCol]="green";
             cantCol++;
         }
         if (cb_Blue.isSelected()) {
+            colores[cantCol]="blue";
             cantCol++;
         }
+        for (int i = 0; i < cantCol ; i++) {
+            if ((cantCol>1) && (i != cantCol-1)){
+                colorSearch = colorSearch + colores[i] + conector;
+            }
+            else {
+                colorSearch = colorSearch + colores[i];
+            }
+            
+        }
 
-        
+        //Lanzamos el metodo donde seleccionamos la llamada apropiada a la API.
+
+        ApiCall();
+    }
+
+    private void ApiCall() {
+
+        //Las busquedas sin filtro por rareza.
+        if ((rarity == null) || (rarity == "Basic Land") || (rarity == "Any")){
+
+            System.out.println(colorSearch);
+            //Hacemos la busqueda con el filtro. Pimero limpiamos el contenido de items.
+            items.clear();
+            items.addAll(getCardsFilterColor(colorSearch));
+
+            System.out.println(items.get(1).getName());
+            //Llenamos el Vlist.
+            LlenarVlist(items);
+        }
+
     }
 
 }
