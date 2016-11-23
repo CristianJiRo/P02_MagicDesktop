@@ -1,25 +1,24 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+/**
+ * Aplicación de escritorio creada por Cristian Jimenez para M07.
+ *
+ * Hacemos peticiones a la API : https://docs.magicthegathering.io/ Con varios filtros y mostramos los resultados.
+ * Tambien podemos mostrar los detalles de una carta seleccionada.
+ *
+ *
+ */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
 
-import java.awt.*;
-import java.util.Observable;
-
-import static sample.MagicApi.getCardsFilterColor;
-
-//API : https://docs.magicthegathering.io/
 
 public class Controller {
 
@@ -32,6 +31,9 @@ public class Controller {
     @FXML private CheckBox cb_Blue;
     @FXML private ComboBox cx_rarity;
     @FXML private CheckBox cb_1Color;
+
+    //Elementos del detalle.
+    @FXML private ImageView im_card;
 
     //ListView
     @FXML private ListView<Card> lv_cardsList;
@@ -130,7 +132,6 @@ public class Controller {
      //Mostramos los datos correspondientes en el ListView.
      public void LlenarVlist(ObservableList<Card> items){
 
-         //items.addAll(getCardsFilterColor("red"+pipe+"white"));
 
          lv_cardsList.setCellFactory((ListView<Card> l) -> new CardCell());
          lv_cardsList.setItems(items);
@@ -141,9 +142,25 @@ public class Controller {
 
              //Lanzamos la funcion mostrar detalles.
 
-             System.out.println(celda.getName());
+             //System.out.println(celda.getName());
+             Detalles(celda);
 
          });
+     }
+
+     //Mostramos los detalles de la carta selesccionada.
+     public void Detalles (Card carta){
+         Image im;
+         if(carta.getUrlImage()!=null) {
+             im = new Image(carta.getUrlImage());
+             im_card.setImage(im);
+         }
+         else {
+             im = new Image("images\\reverse.jpeg");
+
+         }
+
+
      }
 
 
@@ -226,7 +243,6 @@ public class Controller {
             //Sin color ni rareza
             if ((rarity == null) || (rarity == "Any")){
 
-                System.out.println("sin color ni rareza");
                 items.clear();
                 items.addAll(MagicApi.getUncolors());
                 LlenarVlist(items);
@@ -273,7 +289,6 @@ public class Controller {
             //Los colores seleccionados y la rareza seleccionada.
             else {
 
-                System.out.println("Colores selecionados y rareza");
                 items.clear();
                 items.addAll(MagicApi.getCardsFilterRarityColors(rarity,colorSearch));
                 LlenarVlist(items);
