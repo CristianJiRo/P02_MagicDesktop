@@ -4,27 +4,8 @@
 
 }
 
-.fondoIz {
+.fondo {
 
-
-    -fx-background-image: url("../images/ff3.png");
-
-
-}
-
-.fondoDe {
-
-    -fx-background-image: url("../images/ff3.png");
-
-}
-
-.fondoAb {
-
-
-    -fx-background-image: url("../images/ff3.png");
-}
-
-.fondoAr {
 
     -fx-background-image: url("../images/ff3.png");
 
@@ -47,6 +28,11 @@
 .list-view {
 
     -fx-background-image: url("../images/ff4.png");
+
+}
+
+.details {
+
 
 }
 

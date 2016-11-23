@@ -12,10 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -34,6 +31,7 @@ public class Controller {
 
     //Elementos del detalle.
     @FXML private ImageView im_card;
+    @FXML private TextArea ta_details;
 
     //ListView
     @FXML private ListView<Card> lv_cardsList;
@@ -43,6 +41,7 @@ public class Controller {
     String rarity;
     String colorSearch;
     int cantCol=5;
+    String conector;
 
     int checkCount=5;
 
@@ -83,7 +82,6 @@ public class Controller {
 
     //Controlaremos cuantos colores hay seleccionados y desactivaremos la opcion de filtro muti color cuando hayan menos de 2.
     public void DesCheck (CheckBox ch){
-
 
         if (ch.selectedProperty().getValue()){
 
@@ -149,6 +147,7 @@ public class Controller {
 
      //Mostramos los detalles de la carta selesccionada.
      public void Detalles (Card carta){
+         String details;
          Image im;
          if(carta.getUrlImage()!=null) {
              im = new Image(carta.getUrlImage());
@@ -159,6 +158,10 @@ public class Controller {
              im_card.setImage(im);
 
          }
+
+         details="Name: "+ carta.getName() + "\n" +"Type: " + carta.getType();
+         ta_details.setText(details);
+
      }
 
 
@@ -166,7 +169,7 @@ public class Controller {
 
         //Iniciamos la variable conector con la coma para las busquedas con varios colores.
         //La variable cantCol es para saber cuantos colores hay seleccionados.
-        String conector = "%7c";
+        conector = "%7c";
         cantCol=0;
         colorSearch="";
 
@@ -251,25 +254,6 @@ public class Controller {
 
                 items.clear();
                 items.addAll(MagicApi.getUncolorsRarity(rarity));
-                LlenarVlist(items);
-            }
-        }
-        //Filtro con todos los colores.
-        else if (cantCol==5){
-
-            //Todos los colores y rareza seleccionada.
-            if ((rarity != null) && (rarity != "Any")) {
-
-                items.clear();
-                items.addAll(MagicApi.getCardsFilterRarity(rarity));
-                LlenarVlist(items);
-            }
-
-            //Todos los colores y rarezas (Busqueda por defecto al iniciar la app.
-            else {
-
-                items.clear();
-                items.addAll(MagicApi.getAllCards());
                 LlenarVlist(items);
             }
         }
