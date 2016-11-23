@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 
 public class Main extends Application {
 
@@ -14,13 +16,11 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Magic The Gathering. Desktop");
         primaryStage.setScene(new Scene(root, 1280, 720));
-        primaryStage.setMinHeight(580);
+        primaryStage.setMinHeight(680);
         primaryStage.setMinWidth(780);
 
-        //primaryStage.getIcons().add(new Image("icon.png"));
-
         primaryStage.show();
-
+        primaryStage.getIcons().add(new Image("file:.\\src\\sample\\images\\icon.png"));
 
     }
 

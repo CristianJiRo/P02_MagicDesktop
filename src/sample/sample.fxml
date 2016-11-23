@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<HBox id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="580.0" minWidth="780.0" prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<HBox id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="680.0" minWidth="780.0" prefHeight="680.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Pane fx:id="pn_izq" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" styleClass="fondoIz" stylesheets="@css/style.css" HBox.hgrow="NEVER">
          <children>
@@ -68,7 +68,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane prefHeight="410.0" prefWidth="223.0" styleClass="fondoAb" stylesheets="@css/style.css">
+            <StackPane maxHeight="550.0" minHeight="375.0" prefHeight="410.0" prefWidth="223.0" styleClass="fondoAb" stylesheets="@css/style.css">
                <children>
                   <ImageView id="image" fx:id="im_card" fitHeight="331.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
@@ -89,7 +89,7 @@
       </SplitPane>
       <AnchorPane maxWidth="220.0" prefHeight="200.0" prefWidth="220.0" styleClass="fondoDe" stylesheets="@css/style.css" HBox.hgrow="NEVER">
          <children>
-            <ListView fx:id="lv_cardsList" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" styleClass="fondoAb" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ListView fx:id="lv_cardsList" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>

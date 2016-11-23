@@ -88,7 +88,6 @@ public class Controller {
         if (ch.selectedProperty().getValue()){
 
             checkCount++;
-
         }
         else {
 
@@ -156,11 +155,10 @@ public class Controller {
              im_card.setImage(im);
          }
          else {
-             im = new Image("images\\reverse.jpeg");
+             im = new Image("file:.\\src\\sample\\images\\notFound.png");
+             im_card.setImage(im);
 
          }
-
-
      }
 
 
