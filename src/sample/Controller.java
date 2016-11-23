@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -40,6 +42,8 @@ public class Controller {
     String colorSearch;
     int cantCol=5;
 
+    int checkCount=5;
+
     public void initialize() {
         //Inicialización del ComboBox con los valores de las rarezas de las cartas.
         ObservableList<String> rarityList =FXCollections.observableArrayList(
@@ -60,11 +64,45 @@ public class Controller {
         LlenarVlist(items);
 
 
+        //Listeners en los checkbox para controlar cuantos hay seleccionados al mismo tiempo
+        //y activar o desactivar la opción muticolor del filtro.
+
+        cb_Black.selectedProperty().addListener((ov, old_val, new_val) -> DesCheck(cb_Black));
+
+        cb_Blue.selectedProperty().addListener((ov, old_val, new_val) -> DesCheck(cb_Blue));
+
+        cb_White.selectedProperty().addListener((ov, old_val, new_val) -> DesCheck(cb_White));
+
+        cb_Red.selectedProperty().addListener((ov, old_val, new_val) -> DesCheck(cb_Red));
+
+        cb_Green.selectedProperty().addListener((ov, old_val, new_val) -> DesCheck(cb_Green));
+    }
 
 
+    //Controlaremos cuantos colores hay seleccionados y desactivaremos la opcion de filtro muti color cuando hayan menos de 2.
+    public void DesCheck (CheckBox ch){
 
+
+        if (ch.selectedProperty().getValue()){
+
+            checkCount++;
+
+        }
+        else {
+
+            checkCount--;
+        }
+
+        if (checkCount<2){
+
+            cb_1Color.setDisable(true);
+        }
+        else {
+            cb_1Color.setDisable(false);
+        }
 
     }
+
 
      class CardCell extends ListCell<Card> {
          @Override
