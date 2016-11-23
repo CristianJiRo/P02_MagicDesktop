@@ -38,7 +38,7 @@ public class Controller {
     //Variables para los filtros.
     String rarity;
     String colorSearch;
-
+    int cantCol=5;
 
     public void initialize() {
         //Inicialización del ComboBox con los valores de las rarezas de las cartas.
@@ -57,8 +57,11 @@ public class Controller {
 
         //Llenamos el objeto items con las cartas por defecto y llamamos a la funcion que llena la Vlist.
         items.addAll(MagicApi.getAllCards());
-
         LlenarVlist(items);
+
+
+
+
 
 
     }
@@ -69,21 +72,22 @@ public class Controller {
              super.updateItem(item, empty);
 
              if (item != null) {
-                 String[] color = item.getColors();
+                 /*String[] color = item.getColors();
                  String colores = "";
                  if (item.getColors() != null) {
                      for (int i = 0; i < color.length; i++) {
-                         colores = colores + " " + color[i];
+                         //colores = colores + " " + color[i];
                      }
                  }
-                 setText(item.getName() + " \n" + colores);
+                */
+                 setText(item.getName());
 
+                 //setText(item.getName() + "\n" + colores + "\n" +item.getRarity());
                  //ImageView im = new ImageView(item.getUrlImage());
                  //setGraphic(im);
              }
          }
      }
-
 
      //Mostramos los datos correspondientes en el ListView.
      public void LlenarVlist(ObservableList<Card> items){
@@ -99,7 +103,6 @@ public class Controller {
 
              //Lanzamos la funcion mostrar detalles.
 
-
              System.out.println(celda.getName());
 
          });
@@ -111,11 +114,15 @@ public class Controller {
         //Iniciamos la variable conector con la coma para las busquedas con varios colores.
         //La variable cantCol es para saber cuantos colores hay seleccionados.
         String conector = "%7c";
-        int cantCol=0;
+        cantCol=0;
         colorSearch="";
 
         //Guardamos el valor del filtro rarity en una variable.
         rarity= (String) cx_rarity.getValue();
+
+        //Tratamos los dos casos que contienen un espacio en el nombre.
+        if (rarity=="Mythic Rare") rarity="Mythic_Rare";
+        if (rarity=="Basic Land") rarity="Basic_Land";
 
         //En este array añadiremos los colores seleccionados para generar la variable nevecasria para la busqueda con filtro.
         String [] colores = new String []{null,null,null,null,null};
@@ -164,19 +171,77 @@ public class Controller {
 
     private void ApiCall() {
 
-        //Las busquedas sin filtro por rareza.
-        if ((rarity == null) || (rarity == "Basic Land") || (rarity == "Any")){
+        //Caso especial con la rareza Basic Land que no tiene nunca colores.
+        if (rarity=="Basic_Land"){
 
-            System.out.println(colorSearch);
-            //Hacemos la busqueda con el filtro. Pimero limpiamos el contenido de items.
+            //Limpiamos el objeto items y hacemos la peticion solo por rareza.
             items.clear();
-            items.addAll(getCardsFilterColor(colorSearch));
+            items.addAll(MagicApi.getCardsFilterRarity(rarity));
 
-            System.out.println(items.get(1).getName());
             //Llenamos el Vlist.
             LlenarVlist(items);
         }
 
+        //Filtro de cartas sin color.
+        else if (cantCol==0){
+
+            //Sin color ni rareza
+            if ((rarity == null) || (rarity == "Any")){
+
+                System.out.println("sin color ni rareza");
+                items.clear();
+                items.addAll(MagicApi.getUncolors());
+                LlenarVlist(items);
+            }
+
+            //Sin color pero con rareza.
+            else {
+
+                items.clear();
+                items.addAll(MagicApi.getUncolorsRarity(rarity));
+                LlenarVlist(items);
+            }
+        }
+        //Filtro con todos los colores.
+        else if (cantCol==5){
+
+            //Todos los colores y rareza seleccionada.
+            if ((rarity != null) && (rarity != "Any")) {
+
+                items.clear();
+                items.addAll(MagicApi.getCardsFilterRarity(rarity));
+                LlenarVlist(items);
+            }
+
+            //Todos los colores y rarezas (Busqueda por defecto al iniciar la app.
+            else {
+
+                items.clear();
+                items.addAll(MagicApi.getAllCards());
+                LlenarVlist(items);
+            }
+        }
+        //Resto de convinaciones de colores.
+        else{
+
+            //Los colores seleccionados y todas las rarezas.
+            if ((rarity == null) || (rarity == "Any")) {
+
+                items.clear();
+                items.addAll(MagicApi.getCardsFilterColor(colorSearch));
+                LlenarVlist(items);
+
+            }
+            //Los colores seleccionados y la rareza seleccionada.
+            else {
+
+                System.out.println("Colores selecionados y rareza");
+                items.clear();
+                items.addAll(MagicApi.getCardsFilterRarityColors(rarity,colorSearch));
+                LlenarVlist(items);
+            }
+
+        }
     }
 
 }

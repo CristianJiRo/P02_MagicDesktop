@@ -17,16 +17,25 @@ import org.json.JSONObject;
  * Created by Kamelot on 19/11/2016.
  */
 public class MagicApi {
-
+    static final String uncolorBase_URL = "https://api.magicthegathering.io/v1/cards?type=artifact";
     static final String Base_URL = "https://api.magicthegathering.io/v1/cards";
 
     static ArrayList<Card> getAllCards() {
         return doCall(Base_URL);
     }
 
+    static ArrayList<Card> getUncolors() {
+
+        return doCall(uncolorBase_URL);
+    }
+
+    static ArrayList<Card> getUncolorsRarity(String rarity) {
+        URI uri = URI.create(uncolorBase_URL+"&rarity="+rarity);
+        return doCall(uri.toASCIIString());
+    }
+
     static ArrayList<Card> getCardsFilterColor(String color) {
         URI uri = URI.create(Base_URL+"?colors="+color);
-        //System.out.println(uri.toASCIIString());
         return doCall(uri.toASCIIString());
     }
 
@@ -36,7 +45,7 @@ public class MagicApi {
     }
 
     static ArrayList<Card> getCardsFilterRarityColors(String rarity, String color) {
-        URI uri = URI.create(Base_URL+"?rarity="+rarity+"?colors="+color);
+        URI uri = URI.create(Base_URL+"?colors="+color+"&rarity="+rarity);
         return doCall(uri.toASCIIString());
     }
 
