@@ -3,9 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,10 +13,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<HBox id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="680.0" minWidth="780.0" prefHeight="680.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<HBox id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="860.0" minWidth="860.0" prefHeight="760.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Pane fx:id="pn_izq" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" styleClass="fondo" stylesheets="@css/style.css" HBox.hgrow="NEVER">
          <children>
+            <Button fx:id="bt_filtrar" layoutX="10.0" layoutY="790.0" mnemonicParsing="false" onAction="#Filtrar" prefHeight="26.0" prefWidth="180.0" styleClass="button2" stylesheets="@css/style.css" text="Filter" />
+            <AnchorPane layoutX="10.0" layoutY="732.0" />
             <ImageView fx:id="im_cWhite" fitHeight="55.0" fitWidth="65.0" layoutX="25.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/cwhite.png" />
@@ -47,7 +49,6 @@
             <CheckBox fx:id="cb_Red" layoutX="95.0" layoutY="277.0" mnemonicParsing="false" selected="true" text="Red" />
             <CheckBox fx:id="cb_Green" layoutX="95.0" layoutY="332.0" mnemonicParsing="false" selected="true" text="Green" />
             <CheckBox fx:id="cb_Blue" layoutX="95.0" layoutY="387.0" mnemonicParsing="false" selected="true" text="Blue" />
-            <Button fx:id="bt_filtrar" layoutX="10.0" layoutY="541.0" mnemonicParsing="false" onAction="#Filtrar" prefHeight="26.0" prefWidth="180.0" stylesheets="@css/style.css" text="Filter" />
             <ImageView fx:id="im_logo" fitHeight="122.0" fitWidth="200.0" layoutX="38.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/magic.png" />
@@ -55,7 +56,8 @@
             </ImageView>
             <ComboBox fx:id="cx_rarity" layoutX="10.0" layoutY="500.0" prefHeight="26.0" prefWidth="180.0" promptText="Rarity" styleClass="button" stylesheets="@css/style.css" />
             <CheckBox fx:id="cb_1Color" layoutX="10.0" layoutY="441.0" mnemonicParsing="false" text="Only Multi-Color Cards" />
-         </children></Pane>
+         </children>
+      </Pane>
       <SplitPane disable="true" dividerPositions="0.2179930795847751, 0.7664359861591695" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="split" stylesheets="@css/style.css" HBox.hgrow="ALWAYS">
         <items>
             <StackPane maxHeight="122.0" minHeight="122.0" minWidth="328.0" prefHeight="122.0" prefWidth="328.0" styleClass="fondo" stylesheets="@css/style.css">
@@ -78,13 +80,13 @@
             </StackPane>
           <AnchorPane maxHeight="300.0" minHeight="100.0" minWidth="160.0" prefHeight="100.0" prefWidth="160.0" styleClass="fondo" stylesheets="@css/style.css">
                <children>
-                  <TextArea fx:id="ta_details" layoutX="14.0" layoutY="17.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@css/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  <Label fx:id="la_details" layoutX="161.0" layoutY="75.0" styleClass="fondo" stylesheets="@css/style.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>
       <AnchorPane maxWidth="220.0" prefHeight="200.0" prefWidth="220.0" styleClass="fondoDe" stylesheets="@css/style.css" HBox.hgrow="NEVER">
          <children>
-            <ListView fx:id="lv_cardsList" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ListView fx:id="lv_cardsList" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" styleClass="fondoOscuro" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>

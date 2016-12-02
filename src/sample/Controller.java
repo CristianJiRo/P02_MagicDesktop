@@ -31,7 +31,7 @@ public class Controller {
 
     //Elementos del detalle.
     @FXML private ImageView im_card;
-    @FXML private TextArea ta_details;
+    @FXML private Label la_details;
 
     //ListView
     @FXML private ListView<Card> lv_cardsList;
@@ -109,19 +109,8 @@ public class Controller {
              super.updateItem(item, empty);
 
              if (item != null) {
-                 /*String[] color = item.getColors();
-                 String colores = "";
-                 if (item.getColors() != null) {
-                     for (int i = 0; i < color.length; i++) {
-                         //colores = colores + " " + color[i];
-                     }
-                 }
-                */
-                 setText(item.getName());
 
-                 //setText(item.getName() + "\n" + colores + "\n" +item.getRarity());
-                 //ImageView im = new ImageView(item.getUrlImage());
-                 //setGraphic(im);
+                 setText(item.getName());
              }
          }
      }
@@ -142,7 +131,10 @@ public class Controller {
              //System.out.println(celda.getName());
              Detalles(celda);
 
+
          });
+         Image ima = new Image("file:./src/sample/images/reverse.jpeg");
+         im_card.setImage(ima);
      }
 
      //Mostramos los detalles de la carta selesccionada.
@@ -154,13 +146,35 @@ public class Controller {
              im_card.setImage(im);
          }
          else {
-             im = new Image("file:.\\src\\sample\\images\\notFound.png");
+             im = new Image("file:./src/sample/images/notFound.png");
              im_card.setImage(im);
 
          }
 
-         details="Name: "+ carta.getName() + "\n" +"Type: " + carta.getType();
-         ta_details.setText(details);
+
+         //Tratamos el campo texto para que haga saltos de linia y se vea su contenido.
+         double width = la_details.getWidth();
+         double x = width/8;
+         String text="";
+         System.out.println(width);
+
+         for (int i = 0; i < carta.getText().length(); i++) {
+             text= text+carta.getText().charAt(i);
+             if (carta.getText().charAt(i)=='\n'){
+                 x= x+i;
+             }
+            if ((i >x)&& (carta.getText().charAt(i)==' ')){
+                 text= text+"\n";
+                x+=width/8;
+
+            }
+
+
+         }
+
+
+         details="Name: "+ carta.getName() + "\n" +"Type: " + carta.getType()+ "\n" +"Text: " + text;
+         la_details.setText(details);
 
      }
 
@@ -172,6 +186,9 @@ public class Controller {
         conector = "%7c";
         cantCol=0;
         colorSearch="";
+
+
+
 
         //Guardamos el valor del filtro rarity en una variable.
         rarity= (String) cx_rarity.getValue();
@@ -222,10 +239,20 @@ public class Controller {
 
         //Lanzamos el metodo donde seleccionamos la llamada apropiada a la API.
 
+        //Imagen para mostrar que estamos cargando (Las busquedas suelen ser tan rapidas que no se muestra casi nunca)
+        Image ima = new Image("file:./src/sample/images/loading.gif");
+        im_card.setImage(ima);
+
         ApiCall();
+
+        //Volvemos a poner el reverso de la carta
+        ima = new Image("file:./src/sample/images/reverse.jpeg");
+        im_card.setImage(ima);
     }
 
     private void ApiCall() {
+
+
 
         //Caso especial con la rareza Basic Land que no tiene nunca colores.
         if (rarity=="Basic_Land"){
@@ -247,6 +274,8 @@ public class Controller {
                 items.clear();
                 items.addAll(MagicApi.getUncolors());
                 LlenarVlist(items);
+
+
             }
 
             //Sin color pero con rareza.
@@ -255,7 +284,14 @@ public class Controller {
                 items.clear();
                 items.addAll(MagicApi.getUncolorsRarity(rarity));
                 LlenarVlist(items);
+                LlenarVlist(items);
             }
+        }
+        else if ((cantCol==5) && ((rarity == null) || (rarity == "Any")) ){
+
+            items.clear();
+            items.addAll(MagicApi.getAllCards());
+
         }
         //Resto de convinaciones de colores.
         else{
@@ -277,6 +313,11 @@ public class Controller {
             }
 
         }
+
+
     }
+
+
+
 
 }
