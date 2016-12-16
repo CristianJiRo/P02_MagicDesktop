@@ -133,7 +133,8 @@ public class Controller {
 
 
          });
-         Image ima = new Image("file:./src/sample/images/reverse.jpeg");
+
+         Image ima = new Image(getClass().getResourceAsStream("images/reverse.jpeg"));
          im_card.setImage(ima);
      }
 
@@ -146,7 +147,7 @@ public class Controller {
              im_card.setImage(im);
          }
          else {
-             im = new Image("file:./src/sample/images/notFound.png");
+             im = new Image(getClass().getResourceAsStream("images/notFound.png"));
              im_card.setImage(im);
 
          }
@@ -156,7 +157,6 @@ public class Controller {
          double width = la_details.getWidth();
          double x = width/8;
          String text="";
-         System.out.println(width);
 
          for (int i = 0; i < carta.getText().length(); i++) {
              text= text+carta.getText().charAt(i);
@@ -240,13 +240,13 @@ public class Controller {
         //Lanzamos el metodo donde seleccionamos la llamada apropiada a la API.
 
         //Imagen para mostrar que estamos cargando (Las busquedas suelen ser tan rapidas que no se muestra casi nunca)
-        Image ima = new Image("file:./src/sample/images/loading.gif");
+        Image ima = new Image(getClass().getResourceAsStream("images/loading.gif"));
         im_card.setImage(ima);
 
         ApiCall();
 
         //Volvemos a poner el reverso de la carta
-        ima = new Image("file:./src/sample/images/reverse.jpeg");
+        ima = new Image(getClass().getResourceAsStream("images/reverse.jpeg"));
         im_card.setImage(ima);
     }
 

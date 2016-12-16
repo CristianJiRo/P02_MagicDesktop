@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 
 public class Main extends Application {
 
@@ -20,7 +24,11 @@ public class Main extends Application {
         primaryStage.setMinWidth(840);
 
         primaryStage.show();
-        primaryStage.getIcons().add(new Image("file:./src/sample/images/icon.png"));
+
+
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("images/icon.png")));
+        //primaryStage.getIcons().add(new Image("file:./src/sample/images/icon.png"));
+
 
     }
 
